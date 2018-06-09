@@ -10,7 +10,6 @@ public class UserModel {
 
     @Id
     @Column(name = "UserID")
-
     @GeneratedValue(strategy = GenerationType.AUTO )
     private long id;
 

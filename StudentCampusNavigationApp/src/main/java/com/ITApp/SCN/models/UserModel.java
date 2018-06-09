@@ -22,6 +22,10 @@ public class UserModel {
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleModel> roles;
+    
+    @ManyToMany
+    @JoinTable(name = "user_chat", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "chat_id"))
+    private Set<ChatModel> chats;
 
     
     public long getUserId(){return id;}
@@ -40,5 +44,17 @@ public class UserModel {
     public void setRoles(Set<RoleModel> roles) {
         this.roles = roles;
     }
-
+    
+    public Set<ChatModel> getChats() {
+    	return chats;
+    }
+    public void setChats(Set<ChatModel> chats) {
+    	this.chats = chats;
+    }
+    public void addChat(ChatModel chat) {
+    	chats.add(chat);
+    }
+    public void removeChat(ChatModel chat) {
+    	chats.remove(chat);
+    }
 }

@@ -15,11 +15,9 @@ public class MessageModel implements Serializable {
     private long id;
 
     @ManyToOne
-    @NaturalId
     private UserModel sender;
 
     @ManyToOne
-    @NaturalId
     private UserModel receiver;
 
     @Column(name = "Message")

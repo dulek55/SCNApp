@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ITApp.SCN.models.ChatModel;
 import com.ITApp.SCN.models.UserModel;
+import com.ITApp.SCN.repository.ChatModelRepository;
 import com.ITApp.SCN.repository.RoleModelRepository;
 import com.ITApp.SCN.repository.UserModelRepository;
 
@@ -37,13 +39,13 @@ public class UserModelServiceImpl implements UserModelService{
 	}
 
 	@Override
-	public void updateUser(UserModel user, int id) {
+	public void updateUser(UserModel user, long id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void removeUser(int id) {
+	public void removeUser(long id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -52,7 +54,9 @@ public class UserModelServiceImpl implements UserModelService{
 	public UserModel findByName(String name) {
 		return userModelRepository.findByName(name);
 	}
-	
-	
 
+	@Override
+	public void addUserToChat(UserModel user, ChatModel chat) {
+		user.addChat(chat);
+	}
 }

@@ -8,7 +8,7 @@ public class BuildingsModel {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(name = "X")
     private float x;
@@ -19,7 +19,7 @@ public class BuildingsModel {
     @Column(name = "Name")
     private String name;
 
-    public int getBuildingId(){return id;}
+    public long getBuildingId(){return id;}
     public void setBuildingId(int id){this.id = id;}
 
     public float getBuildingsX(){return x;}

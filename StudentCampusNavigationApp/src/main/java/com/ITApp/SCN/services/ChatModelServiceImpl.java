@@ -1,11 +1,13 @@
 package com.ITApp.SCN.services;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ITApp.SCN.models.ChatModel;
+import com.ITApp.SCN.models.MessageModel;
 import com.ITApp.SCN.models.UserModel;
 import com.ITApp.SCN.repository.ChatModelRepository;
 import com.ITApp.SCN.repository.MessageModelRepository;
@@ -23,25 +25,27 @@ public class ChatModelServiceImpl implements ChatModelService{
     
     
 	@Override
-	public void joinChannel(ChatModel chat, UserModel user) {
+	public void joinChat(ChatModel chat, UserModel user) {
 		chat.addUser(user);
+		chatModelRepository.save(chat);
 	}
 	@Override
-	public void leaveChannel(ChatModel chat, UserModel user) {
+	public void leaveChat(ChatModel chat, UserModel user) {
 		chat.removeUser(user);
 		if(chat.getUsers().isEmpty()) {
 			chatModelRepository.delete(chat);
 		}
+		chatModelRepository.save(chat);
 	}
 	@Override
 	public ChatModel findByName(String name) {
 		return chatModelRepository.findByName(name);
 	}
 	@Override
-	public void createChannel(String name) {
-		ChatModel chatModel = new ChatModel();
-		chatModel.setChatName(name);
-		chatModelRepository.save(chatModel);
+	public void createChat(ChatModel chat) {
+		chat.setUsers(new HashSet<UserModel>());
+		chat.setMessages(new HashSet<MessageModel>());
+		chatModelRepository.save(chat);
 	}
 
 }

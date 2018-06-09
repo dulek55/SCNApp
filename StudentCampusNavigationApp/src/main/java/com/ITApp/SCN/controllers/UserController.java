@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,14 +47,21 @@ public class UserController {
 	    public String registration(@RequestParam("username") String username, @RequestParam("password") String password) {
 	    	
 	    	UserModel userModel = new UserModel();
+	    	username.trim();
+	    	password.trim();
 	    	userModel.setUserName(username);
 	    	userModel.setUserPassword(password);
 	    	
-	    	//userValidator.validate(userModel, bindingResult);
-	    	
-	    	 //if (bindingResult.hasErrors()) {
-	         //    return "Registration failed";
-	         //}
+	        if (userModel.getUserName().length() < 2 || userModel.getUserName().length() > 32 || userModel.getUserName().isEmpty()) {
+	        	return "Registration failed, incorrect username";
+	        }
+	        if (userModelService.findByName(userModel.getUserName()) != null) {
+	           return "Registration failed, user already registered";
+	        }
+
+	        if (userModel.getUserPassword().length() < 2 || userModel.getUserPassword().length() > 32 || userModel.getUserPassword().isEmpty()) {
+	            return "Registration failed, incorrect password";
+	        }
 	    	userModelService.addUser(userModel);
 	    	
 	    	securityService.autologin(userModel.getUserName(), userModel.getUserPassword());

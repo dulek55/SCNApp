@@ -8,9 +8,9 @@ import com.ITApp.SCN.models.UserModel;
 
 public interface ChatModelService {
 	
-	public void createChannel(String name);
-	public void joinChannel(ChatModel chat, UserModel user);
-	public void leaveChannel(ChatModel chat, UserModel user);
+	public void createChat(ChatModel chat);
+	public void joinChat(ChatModel chat, UserModel user);
+	public void leaveChat(ChatModel chat, UserModel user);
 	public ChatModel findByName(String name);
 
 }

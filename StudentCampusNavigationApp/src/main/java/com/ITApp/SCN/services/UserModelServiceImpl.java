@@ -1,7 +1,9 @@
 package com.ITApp.SCN.services;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +37,7 @@ public class UserModelServiceImpl implements UserModelService{
 		user.setUserPassword(bCryptPasswordEncoder.encode(user.getUserPassword()));
 		// TODO: If we have admin and normal user we should not grant all permissions on account creation
 		user.setRoles(new HashSet<>(roleModelRepository.findAll()));
+		user.setChats(new HashSet<ChatModel>());
 		userModelRepository.save(user);
 	}
 
@@ -58,5 +61,6 @@ public class UserModelServiceImpl implements UserModelService{
 	@Override
 	public void addUserToChat(UserModel user, ChatModel chat) {
 		user.addChat(chat);
+		userModelRepository.save(user);
 	}
 }

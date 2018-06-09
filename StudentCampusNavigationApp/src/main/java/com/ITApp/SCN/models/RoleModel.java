@@ -8,9 +8,9 @@ import java.util.Set;
 public class RoleModel {
 	
     @Id
-    @Column(name = "UserID")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO )
-    private long Id;
+    private long id;
     
     @Column(name = "name")
 	private String name;

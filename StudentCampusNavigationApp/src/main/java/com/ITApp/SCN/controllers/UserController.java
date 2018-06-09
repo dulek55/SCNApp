@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,22 +41,36 @@ public class UserController {
 	    	return map;
 	    }
 	    
-	    @RequestMapping(value = "/registration", method = RequestMethod.POST, produces = "application/json", consumes = {"application/json"})
+	    @RequestMapping(value = "/registration", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
 		@ResponseBody
-	    public String registration(@RequestBody UserModel userModel, BindingResult bindingResult) {
+	    public String registration(@RequestParam("username") String username, @RequestParam("password") String password) {
 	    	
-	    	userValidator.validate(userModel, bindingResult);
+	    	UserModel userModel = new UserModel();
+	    	userModel.setUserName(username);
+	    	userModel.setUserPassword(password);
 	    	
-	    	 if (bindingResult.hasErrors()) {
-	             return JSONObject.quote("Registration failed");
-	         }
+	    	//userValidator.validate(userModel, bindingResult);
+	    	
+	    	 //if (bindingResult.hasErrors()) {
+	         //    return "Registration failed";
+	         //}
 	    	userModelService.addUser(userModel);
 	    	
 	    	securityService.autologin(userModel.getUserName(), userModel.getUserPassword());
 	    	
-			return JSONObject.quote("Registration successful");
+			return "Registration successful";
 	    }
 	    
+	    @RequestMapping(value = "/login", method = RequestMethod.GET)
+	    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
+	    	securityService.autologin(username, password);
+	        return "login";
+	    }
+	    
+	    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
+	    public String welcome() {
+	        return securityService.findLoggedInUsername();
+	    }
 
 		
 }

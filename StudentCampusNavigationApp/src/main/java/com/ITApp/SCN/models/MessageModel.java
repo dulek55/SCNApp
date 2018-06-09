@@ -19,7 +19,7 @@ public class MessageModel implements Serializable {
     private UserModel sender;
 
     @ManyToOne
-    private ChatModel receiver;
+    private ChatModel chat;
 
     @Column(name = "Message")
     private String message;
@@ -35,9 +35,9 @@ public class MessageModel implements Serializable {
 
     }
 
-    public MessageModel(UserModel sender, ChatModel receiver, String message, long date){
+    public MessageModel(UserModel sender, ChatModel chat, String message, long date){
         this.sender = sender;
-        this.receiver = receiver;
+        this.chat = chat;
         this.message = message;
         this.date = date;
     }
@@ -48,8 +48,8 @@ public class MessageModel implements Serializable {
     public UserModel getMessageSender(){return sender;}
     public void setMessageSender(UserModel sender){this.sender = sender;}
 
-    public ChatModel getMessageReceiver(){return receiver;}
-    public void setMessageReceiver(ChatModel receiver){this.receiver = receiver;}
+    public ChatModel getMessageChat(){return chat;}
+    public void setMessageChat(ChatModel chat){this.chat = chat;}
 
     public long getMessageDate(){return date;}
     public void setMessageDate(long date){this.date = date;}

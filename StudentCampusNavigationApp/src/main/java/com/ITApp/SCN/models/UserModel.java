@@ -12,27 +12,27 @@ public class UserModel {
     @Column(name = "UserID")
 
     @GeneratedValue(strategy = GenerationType.AUTO )
-    private long Id;
+    private long id;
 
-    @Column(name = "Password")
-    private String Password;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "Name")
-    private String Name;
+    private String name;
     
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleModel> roles;
 
     
-    public long getUserId(){return Id;}
-    public void setUserId(long id){this.Id = Id;}
+    public long getUserId(){return id;}
+    public void setUserId(long id){this.id = id;}
 
-    public String getUserPassword(){return Password;}
-    public void setUserPassword(String Password){this.Password = Password;}
+    public String getUserPassword(){return password;}
+    public void setUserPassword(String password){this.password = password;}
 
-    public String getUserName(){return Name;}
-    public void setUserName(String Name){this.Name = Name;}
+    public String getUserName(){return name;}
+    public void setUserName(String name){this.name = name;}
     
     public Set<RoleModel> getRoles() {
         return roles;

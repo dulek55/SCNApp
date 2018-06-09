@@ -1,5 +1,7 @@
 package com.ITApp.SCN.controllers;
 
+import java.util.HashMap;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,14 @@ public class UserController {
 	    @Autowired
 	    private UserModelValidator userValidator;
 	    
+	    @RequestMapping(value = "/registration", method = RequestMethod.GET, produces = "application/json")
+	    @ResponseBody
+	    public HashMap<String, Object> registration() {
+	    	HashMap<String, Object> map = new HashMap<>();
+	    	map.put("messege", "POST /registration to register a new account");
+	    	map.put("error", "1");
+	    	return map;
+	    }
 	    
 	    @RequestMapping(value = "/registration", method = RequestMethod.POST, produces = "application/json", consumes = {"application/json"})
 		@ResponseBody
@@ -45,5 +55,7 @@ public class UserController {
 	    	
 			return JSONObject.quote("Registration successful");
 	    }
+	    
+
 		
 }

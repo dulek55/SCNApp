@@ -4,6 +4,7 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "Message")
@@ -18,19 +19,23 @@ public class MessageModel implements Serializable {
     private UserModel sender;
 
     @ManyToOne
-    private UserModel receiver;
+    private ChatModel receiver;
 
     @Column(name = "Message")
     private String message;
 
     @Column(name = "Date")
     private long date;
+    
+    @ManyToMany
+    @JoinTable(name = "message_chat", joinColumns = @JoinColumn(name = "message_id"), inverseJoinColumns = @JoinColumn(name = "chat_id"))
+    private Set<ChatModel> chats;
 
     protected MessageModel(){
 
     }
 
-    public MessageModel(UserModel sender, UserModel receiver, String message, long date){
+    public MessageModel(UserModel sender, ChatModel receiver, String message, long date){
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
@@ -43,8 +48,8 @@ public class MessageModel implements Serializable {
     public UserModel getMessageSender(){return sender;}
     public void setMessageSender(UserModel sender){this.sender = sender;}
 
-    public UserModel getMessageReceiver(){return receiver;}
-    public void setMessageReceiver(UserModel receiver){this.receiver = receiver;}
+    public ChatModel getMessageReceiver(){return receiver;}
+    public void setMessageReceiver(ChatModel receiver){this.receiver = receiver;}
 
     public long getMessageDate(){return date;}
     public void setMessageDate(long date){this.date = date;}

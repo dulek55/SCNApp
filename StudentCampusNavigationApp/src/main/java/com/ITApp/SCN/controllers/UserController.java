@@ -61,18 +61,23 @@ public class UserController {
 			return "Registration successful";
 	    }
 	    
-	    @RequestMapping(value = "/login", method = RequestMethod.GET)
-	    @ResponseBody
-	    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
-	    	securityService.autologin(username, password);
-	        return "login";
-	    }
 	    
 	    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
 	    @ResponseBody
 	    public String welcome() {
 	        return securityService.findLoggedInUsername();
 	    }
-
+	    
+	    @RequestMapping(value = {"/loginFailed"}, method = RequestMethod.GET)
+	    @ResponseBody
+	    public String loginFailed() {
+	        return "Login Failed";
+	    }
+	    @RequestMapping(value = {"/loginSuccess"}, method = RequestMethod.GET)
+	    @ResponseBody
+	    public String loginSuccess() {
+	        return "Login Success";
+	    }
+	    
 		
 }

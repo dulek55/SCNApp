@@ -12,45 +12,45 @@ public class MessageModel implements Serializable {
     @Id
     @Column(name = "MessageID")
     @GeneratedValue(strategy = GenerationType.AUTO )
-    private long Id;
+    private long id;
 
     @ManyToOne
     @NaturalId
-    private UserModel Sender;
+    private UserModel sender;
 
     @ManyToOne
     @NaturalId
-    private UserModel Receiver;
+    private UserModel receiver;
 
     @Column(name = "Message")
-    private String Message;
+    private String message;
 
     @Column(name = "Date")
-    private long Date;
+    private long date;
 
     protected MessageModel(){
 
     }
 
     public MessageModel(UserModel sender, UserModel receiver, String message, long date){
-        this.Sender = sender;
-        this.Receiver = receiver;
-        this.Message = message;
-        this.Date = date;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.message = message;
+        this.date = date;
     }
 
-    public long getMessageId(){return Id;}
-    public void setMessageId(long id){this.Id = Id;}
+    public long getMessageId(){return id;}
+    public void setMessageId(long id){this.id = id;}
 
-    public UserModel getMessageSender(){return Sender;}
-    public void setMessageSender(UserModel Sender){this.Sender = Sender;}
+    public UserModel getMessageSender(){return sender;}
+    public void setMessageSender(UserModel sender){this.sender = sender;}
 
-    public UserModel getMessageReceiver(){return Receiver;}
-    public void setMessageReceiver(UserModel Receiver){this.Receiver = Receiver;}
+    public UserModel getMessageReceiver(){return receiver;}
+    public void setMessageReceiver(UserModel receiver){this.receiver = receiver;}
 
-    public long getMessageDate(){return Date;}
-    public void setMessageDate(long Date){this.Date = Date;}
+    public long getMessageDate(){return date;}
+    public void setMessageDate(long date){this.date = date;}
 
-    public void setMessage(String message){Message = message;}
-    public String getMessage(){return Message;}
+    public void setMessage(String message){this.message = message;}
+    public String getMessage(){return message;}
 }

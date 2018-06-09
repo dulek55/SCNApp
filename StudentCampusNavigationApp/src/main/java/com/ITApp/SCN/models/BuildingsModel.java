@@ -8,27 +8,27 @@ public class BuildingsModel {
 
     @Id
     @GeneratedValue
-    private int Id;
+    private int id;
 
     @Column(name = "X")
-    private float X;
+    private float x;
 
     @Column(name = "Y")
-    private float Y;
+    private float y;
 
     @Column(name = "Name")
-    private String Name;
+    private String name;
 
-    public int getBuildingId(){return Id;}
-    public void setBuildingId(int id){this.Id = Id;}
+    public int getBuildingId(){return id;}
+    public void setBuildingId(int id){this.id = id;}
 
-    public float getBuildingsX(){return X;}
-    public void setBuildingsX(float X){this.X = X;}
+    public float getBuildingsX(){return x;}
+    public void setBuildingsX(float x){this.x = x;}
 
-    public float getBuildingsY(){return Y;}
-    public void setBuildingsY(float Y){this.Y = Y;}
+    public float getBuildingsY(){return y;}
+    public void setBuildingsY(float y){this.y = y;}
 
-    public String getBuildingsName(){return Name;}
-    public void setBuildingName(String Name){this.Name = Name;}
+    public String getBuildingsName(){return name;}
+    public void setBuildingName(String name){this.name = name;}
 
 }

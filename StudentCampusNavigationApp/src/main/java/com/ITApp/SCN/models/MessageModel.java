@@ -15,7 +15,7 @@ public class MessageModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO )
     private long id;
 
-    @ManyToOne
+    @ManyToOne			// WHY HERE WITHOUT @Column??
     private UserModel sender;
 
     @ManyToOne

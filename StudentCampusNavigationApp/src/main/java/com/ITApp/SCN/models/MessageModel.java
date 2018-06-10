@@ -27,11 +27,11 @@ public class MessageModel implements Serializable {
     @Column(name = "Date")
     private long date;
     
-    @ManyToMany
+    @ManyToMany				// why this??
     @JoinTable(name = "message_chat", joinColumns = @JoinColumn(name = "message_id"), inverseJoinColumns = @JoinColumn(name = "chat_id"))
     private Set<ChatModel> chats;
 
-    protected MessageModel(){
+    /*protected MessageModel(){
 
     }
 
@@ -40,7 +40,7 @@ public class MessageModel implements Serializable {
         this.chat = chat;
         this.message = message;
         this.date = date;
-    }
+    }*/
 
     public long getMessageId(){return id;}
     public void setMessageId(long id){this.id = id;}

@@ -21,14 +21,8 @@ public class MessageModelServiceImpl implements MessageModelService {
     private MessageModelRepository messageModelRepository;
 
 	@Override
-	public void addMessageToUser(UserModel sender, UserModel receiver, MessageModel message) {
-		
-	}
-
-	@Override
-	public void addMessageToRole(UserModel sender, RoleModel receiverRole, MessageModel message) {
-		// TODO Auto-generated method stub
-		
+	public void sendMessageToChat(MessageModel message) {
+		messageModelRepository.save(message);
 	}
 
 }

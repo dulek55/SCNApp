@@ -1,5 +1,7 @@
 package com.ITApp.SCN.controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,11 +37,11 @@ public class MessageController {
     	UserModel userModel = userModelService.findByName(securityService.findLoggedInUsername());
     	ChatModel chatModel = chatModelService.findByName(chatname);
     	MessageModel messageModel = new MessageModel();
-    	
+    	    	
     	messageModel.setMessageSender(userModel);
     	messageModel.setMessageChat(chatModel);
     	messageModel.setMessage(messageText);
-    	messageModel.setMessageDate(0); 		//TODO
+    	messageModel.setMessageDate(new Date());
     	
     	if(chatModel == null) {
     		chatModel = new ChatModel();

@@ -4,6 +4,7 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -25,9 +26,9 @@ public class MessageModel implements Serializable {
     private String message;
 
     @Column(name = "Date")
-    private long date;
+    private Date date;
     
-    @ManyToMany				// why this??
+    @ManyToMany			
     @JoinTable(name = "message_chat", joinColumns = @JoinColumn(name = "message_id"), inverseJoinColumns = @JoinColumn(name = "chat_id"))
     private Set<ChatModel> chats;
 
@@ -51,8 +52,8 @@ public class MessageModel implements Serializable {
     public ChatModel getMessageChat(){return chat;}
     public void setMessageChat(ChatModel chat){this.chat = chat;}
 
-    public long getMessageDate(){return date;}
-    public void setMessageDate(long date){this.date = date;}
+    public Date getMessageDate(){return date;}
+    public void setMessageDate(Date date){this.date = date;}
 
     public void setMessage(String message){this.message = message;}
     public String getMessage(){return message;}

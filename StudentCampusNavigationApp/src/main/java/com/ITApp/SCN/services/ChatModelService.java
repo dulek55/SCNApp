@@ -12,5 +12,6 @@ public interface ChatModelService {
 	public void joinChat(ChatModel chat, UserModel user);
 	public void leaveChat(ChatModel chat, UserModel user);
 	public ChatModel findByName(String name);
+	public void addMessage(ChatModel chat, MessageModel message);
 
 }

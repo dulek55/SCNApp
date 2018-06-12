@@ -47,5 +47,10 @@ public class ChatModelServiceImpl implements ChatModelService{
 		chat.setMessages(new HashSet<MessageModel>());
 		chatModelRepository.save(chat);
 	}
+	@Override
+	public void addMessage(ChatModel chat, MessageModel message) {
+		chat.addMessage(message);
+		chatModelRepository.save(chat);
+	}
 
 }

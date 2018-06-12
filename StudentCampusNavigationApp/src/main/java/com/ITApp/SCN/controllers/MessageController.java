@@ -52,6 +52,7 @@ public class MessageController {
     		chatModelService.joinChat(chatModel, userModel);
     		userModelService.addUserToChat(userModel, chatModel);
     	}
+    	chatModelService.addMessage(chatModel, messageModel);
     	messageModelService.sendMessageToChat(messageModel);
 
 		return "Message sent successfully";

@@ -14,4 +14,5 @@ public interface UserModelService {
     public void removeUser(long id);
     public UserModel findByName(String name);
     public void addUserToChat(UserModel user, ChatModel chat);
+    public void removeUserFromChat(UserModel user, ChatModel chat);
 }

@@ -33,6 +33,23 @@ public class ChatController {
     @Autowired
     private SecurityService securityService;
 
+    
+    @RequestMapping(value = "/createChat", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
+	@ResponseBody
+    public String createChat(@RequestParam("chatname") String chatname) {
+    	
+    	ChatModel chatModel = chatModelService.findByName(chatname);
+    	
+    	if(chatModel != null) {
+    		return "Chat with this name already exists!";
+    	} else {
+    		chatModel = new ChatModel();
+    		chatModel.setChatName(chatname);
+    		chatModelService.createChat(chatModel);
+    	}
+    	
+		return "Created chat successfully";
+    }
 	
 	@RequestMapping(value = "/joinChat", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
 	@ResponseBody
@@ -41,20 +58,75 @@ public class ChatController {
     	UserModel userModel = userModelService.findByName(securityService.findLoggedInUsername());
     	ChatModel chatModel = chatModelService.findByName(chatname);
     	
-    	// TO DO: check if user can join the chat
-    	
-    	if(chatModel != null) {
-    		chatModelService.joinChat(chatModel, userModel);
-    	}else{
-    		chatModel = new ChatModel();
-    		chatModel.setChatName(chatname);
-    		chatModelService.createChat(chatModel);
-        	chatModelService.joinChat(chatModel, userModel);
+    	if(chatModel == null) {
+    		return "Chat doesn't exist!";
     	}
+    	
+    	chatModelService.joinChat(chatModel, userModel);
     	userModelService.addUserToChat(userModel, chatModel);
 
     	
 		return "Joined chat successfully";
+    }
+	
+	@RequestMapping(value = "/leaveChat", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
+	@ResponseBody
+    public String leaveChat(@RequestParam("chatname") String chatname) {
+    	
+    	UserModel userModel = userModelService.findByName(securityService.findLoggedInUsername());
+    	ChatModel chatModel = chatModelService.findByName(chatname);
+    	
+    	if(chatModel == null) {
+    		return "Chat doesn't exist!";
+    	}
+    	
+    	chatModelService.leaveChat(chatModel, userModel);
+    	userModelService.removeUserFromChat(userModel, chatModel);
+
+    	
+		return "Joined chat successfully";
+    }
+	
+	@RequestMapping(value = "/addUserToChat", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
+	@ResponseBody
+    public String addUserToChat(@RequestParam("chatname") String chatname, @RequestParam("username") String username) {
+    	
+    	UserModel userModel = userModelService.findByName(username);
+    	ChatModel chatModel = chatModelService.findByName(chatname);
+    	
+    	if(chatModel == null) {
+    		return "Chat doesn't exist!";
+    	}
+    	if(userModel == null) {
+    		return "User doesn't exist!";
+    	}
+    	
+    	chatModelService.joinChat(chatModel, userModel);
+    	userModelService.addUserToChat(userModel, chatModel);
+
+    	
+		return "Added user to chat successfully";
+    }
+	
+	@RequestMapping(value = "/removeUserFromChat", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"})
+	@ResponseBody
+    public String removeUserFromChat(@RequestParam("chatname") String chatname, @RequestParam("username") String username) {
+    	
+    	UserModel userModel = userModelService.findByName(username);
+    	ChatModel chatModel = chatModelService.findByName(chatname);
+    	
+    	if(chatModel == null) {
+    		return "Chat doesn't exist!";
+    	}
+    	if(userModel == null) {
+    		return "User doesn't exist!";
+    	}
+    	
+    	chatModelService.leaveChat(chatModel, userModel);
+    	userModelService.removeUserFromChat(userModel, chatModel);
+
+    	
+		return "Removed user from chat successfully";
     }
 	
 	@RequestMapping(value = "/getUserChats", method = RequestMethod.GET, produces = "application/json")

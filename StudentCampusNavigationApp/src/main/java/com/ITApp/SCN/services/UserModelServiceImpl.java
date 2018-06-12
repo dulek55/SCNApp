@@ -63,4 +63,10 @@ public class UserModelServiceImpl implements UserModelService{
 		user.addChat(chat);
 		userModelRepository.save(user);
 	}
+
+	@Override
+	public void removeUserFromChat(UserModel user, ChatModel chat) {
+		user.removeChat(chat);
+		userModelRepository.save(user);
+	}
 }

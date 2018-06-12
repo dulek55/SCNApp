@@ -12,7 +12,6 @@ import java.util.Set;
 public class MessageModel implements Serializable {
 
     @Id
-    @Column(name = "MessageID")
     @GeneratedValue(strategy = GenerationType.AUTO )
     private long id;
 
@@ -20,6 +19,7 @@ public class MessageModel implements Serializable {
     private UserModel sender;
 
     @ManyToOne
+    @JoinColumn(name = "chat_messages")
     private ChatModel chat;
 
     @Column(name = "Message")
@@ -28,9 +28,6 @@ public class MessageModel implements Serializable {
     @Column(name = "Date")
     private Date date;
     
-    @ManyToMany			
-    @JoinTable(name = "message_chat", joinColumns = @JoinColumn(name = "message_id"), inverseJoinColumns = @JoinColumn(name = "chat_id"))
-    private Set<ChatModel> chats;
 
     /*protected MessageModel(){
 

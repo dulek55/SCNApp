@@ -46,11 +46,7 @@ public class MessageController {
     	messageModel.setMessageDate(new Date());
     	
     	if(chatModel == null) {
-    		chatModel = new ChatModel();
-    		chatModel.setChatName(chatname);
-    		chatModelService.createChat(chatModel);
-    		chatModelService.joinChat(chatModel, userModel);
-    		userModelService.addUserToChat(userModel, chatModel);
+    		return "Chat doesn't exist!";
     	}
     	messageModelService.sendMessageToChat(messageModel);
     	chatModelService.addMessage(chatModel, messageModel);

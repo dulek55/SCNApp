@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ITApp.SCN.models.ChatModel;
+import com.ITApp.SCN.models.MessageModel;
 import com.ITApp.SCN.models.UserModel;
 import com.ITApp.SCN.services.ChatModelService;
 import com.ITApp.SCN.services.MessageModelService;
@@ -60,6 +61,17 @@ public class ChatController {
     	HashMap<String, Object> map = new HashMap<>();
     	for (ChatModel chatModel : userModel.getChats()) {
     		map.put(String.valueOf(chatModel.getChatId()),chatModel.getChatName());
+    	}
+    	return map;
+	}
+	
+	@RequestMapping(value = "/getChatsMessages", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+    public HashMap<String, Object> getChatsMessages(@RequestParam("chatname") String chatname) {
+		ChatModel chatModel = chatModelService.findByName(chatname);
+    	HashMap<String, Object> map = new HashMap<>();
+    	for (MessageModel messageModel : chatModel.getMessages()) {
+    		map.put(String.valueOf(messageModel.getMessageId()),messageModel.getMessage());
     	}
     	return map;
 	}

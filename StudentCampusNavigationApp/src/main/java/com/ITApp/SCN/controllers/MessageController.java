@@ -47,6 +47,8 @@ public class MessageController {
     	
     	if(chatModel == null) {
     		return "Chat doesn't exist!";
+    	} else if(!chatModel.checkIfUserInChat(userModel)){
+    		return "User is not in the chat!";
     	}
     	messageModelService.sendMessageToChat(messageModel);
     	chatModelService.addMessage(chatModel, messageModel);

@@ -76,4 +76,12 @@ public class ChatModel {
 		this.messages.add(message);
 	}
 	
+	public boolean checkIfUserInChat(UserModel user) {
+		for (UserModel userModel : this.getUsers()) {
+    		if(userModel.equals(user))
+    			return true;
+    	}
+		return false;
+	}
+	
 }

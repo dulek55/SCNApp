@@ -40,6 +40,8 @@ public class ChatController {
     	UserModel userModel = userModelService.findByName(securityService.findLoggedInUsername());
     	ChatModel chatModel = chatModelService.findByName(chatname);
     	
+    	// TO DO: check if user can join the chat
+    	
     	if(chatModel != null) {
     		chatModelService.joinChat(chatModel, userModel);
     	}else{

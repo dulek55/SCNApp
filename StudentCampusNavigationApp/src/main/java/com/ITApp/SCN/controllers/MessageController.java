@@ -3,6 +3,7 @@ package com.ITApp.SCN.controllers;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import com.ITApp.SCN.services.MessageModelService;
 import com.ITApp.SCN.services.SecurityService;
 import com.ITApp.SCN.services.UserModelService;
 
+@Controller
 public class MessageController {
 	@Autowired
 	private UserModelService userModelService;
@@ -32,7 +34,7 @@ public class MessageController {
 	
 	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST, consumes = {"application/x-www-form-urlencoded"}) // IS CONSUMES CORRECT??
 	@ResponseBody
-    public String sendMessage(@RequestParam("chatName") String chatname, @RequestParam("message") String messageText) {
+    public String sendMessage(@RequestParam("chatname") String chatname, @RequestParam("message") String messageText) {
     	
     	UserModel userModel = userModelService.findByName(securityService.findLoggedInUsername());
     	ChatModel chatModel = chatModelService.findByName(chatname);

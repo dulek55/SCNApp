@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,9 +68,9 @@ public class ChatController {
     	return map;
 	}
 	
-	@RequestMapping(value = "/getChatsMessages", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/getChatsMessages/{chatname}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-    public HashMap<String, Object> getChatsMessages(@RequestParam("chatname") String chatname) {
+    public HashMap<String, Object> getChatsMessages(@PathVariable("chatname") String chatname) {
 		ChatModel chatModel = chatModelService.findByName(chatname);
     	HashMap<String, Object> map = new HashMap<>();
     	for (MessageModel messageModel : chatModel.getMessages()) {

@@ -146,7 +146,10 @@ public class ChatController {
 		ChatModel chatModel = chatModelService.findByName(chatname);
     	HashMap<String, Object> map = new HashMap<>();
     	for (MessageModel messageModel : chatModel.getMessages()) {
-    		map.put(String.valueOf(messageModel.getMessageId()),messageModel.getMessage());
+    		String response = messageModel.getMessageSender().getUserName();
+    		response += " ||| " + messageModel.getMessage();
+    		response += " ||| " + messageModel.getMessageDate().toString();
+    		map.put(String.valueOf(messageModel.getMessageId()),response);
     	}
     	return map;
 	}
